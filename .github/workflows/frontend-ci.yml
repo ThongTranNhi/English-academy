@@ -1,0 +1,52 @@
+name: Frontend CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "feature/**"
+      - "fix/**"
+      - "refactor/**"
+      - "docs/**"
+      - "chore/**"
+      - "test/**"
+
+# Chỉ cần quyền đọc mã nguồn. Workflow không dùng secrets và không deploy.
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Typecheck, lint, test & build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js (LTS from .nvmrc)
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check (TS 7)
+        run: npm run typecheck
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Vitest
+        run: npm run test
+
+      - name: Production build
+        # Typecheck đã chạy ở bước trên, nên chỉ chạy Vite build.
+        run: npx vite build

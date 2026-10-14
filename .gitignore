@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Secrets / credentials
+*.pem
+*.key
+
+# Test & tooling output
+coverage
+.eslintcache
