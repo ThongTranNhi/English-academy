@@ -4,6 +4,7 @@ import { getLesson } from "@/data/lessons";
 import { getCourse } from "@/data/courses";
 import { Container } from "@/components/shared/Container";
 import { CoverArt } from "@/components/shared/CoverArt";
+import { CourseCover } from "@/features/courses/CourseCover";
 import { Quiz } from "@/components/shared/Quiz";
 import { SpeakButton } from "@/components/shared/SpeakButton";
 import { Button } from "@/components/ui/button";
@@ -51,7 +52,7 @@ export default function LearningPage() {
 
         {(lesson.type === "video" || lesson.type === "audio") && (
           <div className="relative overflow-hidden rounded-[16px]">
-            <CoverArt tone={course?.tone ?? "indigo"} icon={lesson.type === "video" ? "Video" : "Headphones"} className="aspect-video" />
+            {course?.image ? <CourseCover course={course} priority className="aspect-video" /> : <CoverArt tone={course?.tone ?? "indigo"} icon={lesson.type === "video" ? "Video" : "Headphones"} className="aspect-video" />}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/30 text-white">
               <PlayCircle className="size-16" aria-hidden />
               <p className="rounded-full bg-navy/60 px-4 py-1.5 text-sm">

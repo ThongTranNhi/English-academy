@@ -1,20 +1,47 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #4f46e5;
-  --color-primary-hover: #4338ca;
-  --color-primary-soft: #eef2ff;
-  --color-navy: #0f172a;
-  --color-surface: #f8fafc;
-  --color-accent: #06b6d4;
-  --color-accent-soft: #ecfeff;
-  --color-highlight: #f59e0b;
-  --color-highlight-soft: #fffbeb;
+  /* Bảng màu rực rỡ lấy cảm hứng từ Lumi. "-shade" là bóng đáy 3D, "-ink" là màu chữ đạt tương phản trên nền sáng. */
+  --color-primary: #3b5bfd;
+  --color-primary-hover: #2f4ae6;
+  --color-primary-shade: #2337c4;
+  --color-primary-soft: #e8edff;
+  --color-navy: #1e1b4b;
+  --color-surface: #f7f9ff;
 
-  --font-sans: "Be Vietnam Pro", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-sky: #1cb0f6;
+  --color-sky-shade: #0f8fd0;
+  --color-sky-soft: #dff4ff;
+  --color-sky-ink: #0569a3;
+  --color-sun: #ffc800;
+  --color-sun-shade: #e0a400;
+  --color-sun-soft: #fff4cc;
+  --color-sun-ink: #8a4b00;
+  --color-leaf: #58cc02;
+  --color-leaf-shade: #46a302;
+  --color-leaf-soft: #e5f8d4;
+  --color-leaf-ink: #2b7000;
+  --color-grape: #8a3ffc;
+  --color-grape-shade: #6a26d6;
+  --color-grape-soft: #f1e8ff;
+  --color-grape-ink: #7a2fe6;
+  --color-coral: #ff4b6e;
+  --color-coral-shade: #d63356;
+  --color-coral-soft: #ffe3ea;
+  --color-coral-ink: #c41c42;
+  --color-tangerine: #ff9600;
+  --color-tangerine-shade: #d97e00;
+
+  /* Tên cũ trỏ vào bảng màu mới để các trang khác đổi theo. */
+  --color-accent: var(--color-sky);
+  --color-accent-soft: var(--color-sky-soft);
+  --color-highlight: var(--color-sun);
+  --color-highlight-soft: var(--color-sun-soft);
+
+  --font-sans: "Nunito", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
 
-  --radius-card: 14px;
+  --radius-card: 18px;
   --spacing-header: 64px;
   --spacing-header-lg: 76px;
 }
@@ -49,8 +76,21 @@
     padding-block: 64px;
   }
   @media (width >= 64rem) {
-    padding-block: 72px;
+    padding-block: 80px;
   }
+}
+
+/* Thẻ kiểu Duolingo: viền dày và bóng đáy đặc. */
+@utility duo-card {
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 5px 0 #e2e8f0;
+}
+
+/* Dải cầu vồng của thương hiệu. */
+@utility rainbow-bar {
+  background: linear-gradient(90deg, var(--color-coral), var(--color-tangerine), var(--color-sun), var(--color-leaf), var(--color-sky), var(--color-primary), var(--color-grape));
 }
 
 .flip-card {
@@ -70,36 +110,135 @@
   transform: rotateY(180deg);
 }
 
+/* ---------- Nền các section ---------- */
+.hero-bg {
+  background: radial-gradient(circle at 8% 18%, #ffe3ea 0, transparent 32%),
+    radial-gradient(circle at 92% 12%, #dff4ff 0, transparent 36%),
+    radial-gradient(circle at 78% 92%, #fff4cc 0, transparent 34%),
+    radial-gradient(circle at 20% 95%, #e5f8d4 0, transparent 30%), #ffffff;
+}
+
 .academy-story {
   scroll-margin-top: 90px;
-  background: radial-gradient(ellipse at 12% 20%, #e0e7ff 0, transparent 55%),
-    radial-gradient(ellipse at 95% 85%, #cffafe 0, transparent 45%), #f8fafc;
+  background: radial-gradient(ellipse at 12% 20%, #dbe3ff 0, transparent 55%),
+    radial-gradient(ellipse at 95% 85%, #ffe3ea 0, transparent 45%), #f7f9ff;
 }
 
 .academy-pattern {
-  background-image: radial-gradient(rgb(79 70 229 / 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: #ffffff;
+  background-image: radial-gradient(rgb(59 91 253 / 0.14) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
 }
 
+.bg-sky-wash {
+  background: linear-gradient(180deg, #dff4ff 0%, #f0f9ff 100%);
+}
+.bg-sun-wash {
+  background: linear-gradient(180deg, #fff4cc 0%, #fffbeb 100%);
+}
+.bg-coral-wash {
+  background: linear-gradient(180deg, #ffe3ea 0%, #fff5f7 100%);
+}
+.bg-night {
+  background: radial-gradient(circle at 15% 10%, rgb(138 63 252 / 0.55), transparent 45%),
+    radial-gradient(circle at 90% 90%, rgb(28 176 246 / 0.4), transparent 45%), #1e1b4b;
+}
+
+.lumi-playground {
+  background: radial-gradient(circle at 18% 55%, #b8e8ff 0, transparent 40%),
+    radial-gradient(circle at 90% 10%, #ffe58a 0, transparent 35%),
+    radial-gradient(circle at 70% 95%, #ffc9d6 0, transparent 35%), #e8edff;
+}
+
+/* ---------- Chuyển trang ---------- */
 @keyframes page-arrive {
+  from { opacity: 0; transform: translateY(28px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes soft-arrive {
   from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .route-frame { animation: page-arrive 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-  .content-switch { animation: page-arrive 280ms ease-out both; }
-  .mascot-panel { animation: page-arrive 220ms ease-out both; }
+  /* backwards: hết hiệu ứng thì không giữ transform, tránh làm hỏng position: fixed bên trong trang. */
+  .route-frame { animation: page-arrive 560ms cubic-bezier(0.22, 1.2, 0.36, 1) backwards; }
+  .content-switch { animation: soft-arrive 280ms ease-out both; }
+  .mascot-panel { animation: soft-arrive 220ms ease-out both; }
   .mascot-button { transition: box-shadow 200ms ease, transform 200ms ease; }
-  .mascot-button:hover { transform: translateY(-3px); }
+  .mascot-button:hover { transform: translateY(-4px) rotate(-3deg); }
 }
 
+/* ---------- Hiện dần khi cuộn tới (bật bởi useScrollReveal) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-on main section:not([data-no-reveal]) {
+    transition: opacity 700ms ease-out, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal-on main section:not([data-no-reveal]):not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .reveal-on main section:not([data-no-reveal]) ul > li {
+    transition: opacity 500ms ease-out, transform 600ms cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .reveal-on main section:not([data-no-reveal]):not(.is-revealed) ul > li {
+    opacity: 0;
+    transform: translateY(26px) scale(0.94);
+  }
+  .reveal-on main section.is-revealed ul > li:nth-child(2) { transition-delay: 70ms; }
+  .reveal-on main section.is-revealed ul > li:nth-child(3) { transition-delay: 140ms; }
+  .reveal-on main section.is-revealed ul > li:nth-child(4) { transition-delay: 210ms; }
+  .reveal-on main section.is-revealed ul > li:nth-child(5) { transition-delay: 280ms; }
+  .reveal-on main section.is-revealed ul > li:nth-child(6) { transition-delay: 350ms; }
+  .reveal-on main section.is-revealed ul > li:nth-child(n + 7) { transition-delay: 420ms; }
+}
+
+/* ---------- Hiệu ứng rê chuột ---------- */
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+  30% { transform: translateY(-7px) rotate(-8deg) scale(1.12); }
+  55% { transform: translateY(0) rotate(5deg) scale(0.96); }
+  75% { transform: translateY(-2px) rotate(-2deg) scale(1.03); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(var(--float-rotate, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--float-rotate, 0deg)); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .lift-card {
+    transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 260ms ease, border-color 200ms ease;
+  }
+  .lift-card:hover,
+  .lift-card:focus-within {
+    transform: translateY(-6px) rotate(-0.6deg);
+    border-color: rgb(59 91 253 / 0.45);
+    box-shadow: 0 9px 0 #dbe3ff, 0 22px 36px rgb(59 91 253 / 0.16);
+  }
+  .group:hover .icon-pop,
+  .group:focus-visible .icon-pop {
+    animation: icon-bounce 650ms ease-in-out;
+  }
+  .wiggle-hover:hover { animation: wiggle 400ms ease-in-out; }
+
+  a.group:focus-visible,
+  article.group:focus-within {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .float-y { animation: float-y 4.5s ease-in-out infinite; }
+  .float-y-slow { animation: float-y 6s ease-in-out 0.8s infinite; }
+}
+
+/* ---------- Lumi ---------- */
 .mascot-dock { bottom: max(1rem, env(safe-area-inset-bottom)); }
-
-.lumi-playground {
-  background: radial-gradient(circle at 18% 55%, #cffafe 0, transparent 40%),
-    radial-gradient(circle at 90% 10%, #fef3c7 0, transparent 35%), #eef2ff;
-}
 
 .lumi-speech::after {
   content: "";
@@ -109,69 +248,33 @@
   width: 14px;
   height: 14px;
   background: white;
-  border-right: 2px solid #e0e7ff;
-  border-bottom: 2px solid #e0e7ff;
+  border-right: 2px solid #c9d3ff;
+  border-bottom: 2px solid #c9d3ff;
   transform: rotate(45deg);
 }
-.lumi-answer { box-shadow: 0 4px 0 #e2e8f0; }
-.lumi-answer:not(:disabled):active { box-shadow: 0 1px 0 #e2e8f0; transform: translateY(3px); }
-.lumi-star { left: 50%; top: 45%; }
-.lumi-star-0 { --spark-x: -70px; --spark-y: -75px; }
-.lumi-star-1 { --spark-x: 65px; --spark-y: -70px; }
-.lumi-star-2 { --spark-x: -90px; --spark-y: -15px; }
-.lumi-star-3 { --spark-x: 85px; --spark-y: -5px; }
-.lumi-star-4 { --spark-x: -55px; --spark-y: 70px; }
-.lumi-star-5 { --spark-x: 50px; --spark-y: 65px; }
-.mascot-button .lumi-star { --spark-x: 0px; --spark-y: -50px; }
-.mascot-button .lumi-star-0 { --spark-x: -35px; }
-.mascot-button .lumi-star-1 { --spark-x: 35px; }
-.mascot-button .lumi-star-2 { --spark-x: -45px; --spark-y: -5px; }
-.mascot-button .lumi-star-3 { --spark-x: 45px; --spark-y: -5px; }
-.mascot-button .lumi-star-4 { --spark-x: -30px; --spark-y: 30px; }
-.mascot-button .lumi-star-5 { --spark-x: 30px; --spark-y: 30px; }
+.lumi-answer { box-shadow: 0 5px 0 #e2e8f0; }
+.lumi-answer:not(:disabled):active { box-shadow: 0 1px 0 #e2e8f0; transform: translateY(4px); }
 
-@keyframes lumi-wave {
-  0%, 100% { transform: rotate(0) translateY(0); }
-  20% { transform: rotate(-9deg) translateY(-7px); }
-  45% { transform: rotate(8deg) translateY(-5px); }
-  70% { transform: rotate(-5deg) translateY(-3px); }
+/* Mỗi lần đổi cảm xúc, Lumi bật nhẹ để thấy rõ phản ứng; bản thân ảnh động lo phần cử động. */
+@keyframes lumi-pop {
+  0% { transform: scale(0.86) translateY(6px); }
+  55% { transform: scale(1.06) translateY(-4px); }
+  100% { transform: scale(1) translateY(0); }
 }
-@keyframes lumi-jump {
-  0%, 100% { transform: translateY(0) scale(1); }
-  15% { transform: translateY(5px) scale(1.06, 0.92); }
-  45% { transform: translateY(-24px) scale(0.96, 1.05) rotate(-5deg); }
-  70% { transform: translateY(0) scale(1.05, 0.95); }
-}
-@keyframes lumi-nod {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  35% { transform: translateY(5px) rotate(6deg); }
-  70% { transform: translateY(-3px) rotate(-3deg); }
-}
-@keyframes lumi-curious {
-  0%, 100% { transform: rotate(0); }
-  40%, 65% { transform: rotate(-10deg) scale(1.04); }
-}
-@keyframes lumi-stars {
-  0% { opacity: 0; transform: translate(0, 0) scale(0.2); }
-  25% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--spark-x), var(--spark-y)) rotate(130deg) scale(0.9); }
+@keyframes lumi-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.55; }
+  50% { transform: scaleX(0.85); opacity: 0.35; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .lumi-actor[data-mood="wave"] .lumi-pose { animation: lumi-wave 900ms ease-in-out 2; }
-  .lumi-actor[data-mood="celebrate"] .lumi-pose { animation: lumi-jump 900ms ease-in-out 2; }
-  .lumi-actor[data-mood="encourage"] .lumi-pose { animation: lumi-nod 850ms ease-in-out 2; }
-  .lumi-actor[data-mood="curious"] .lumi-pose { animation: lumi-curious 1100ms ease-in-out; }
-  .lumi-star { animation: lumi-stars 1400ms ease-out 2 both; }
+  .lumi-actor:not([data-mood="idle"]) .lumi-pose { animation: lumi-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .lumi-shadow { animation: lumi-shadow 1.1s ease-in-out infinite; }
   .lumi-answer { transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease; }
 }
-.lumi-actor.lumi-motion-off .lumi-pose { animation: none; }
-.lumi-actor.lumi-motion-off .lumi-sparkles { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .lumi-sparkles { display: none; }
   .lumi-answer:not(:disabled):active { transform: none; }
 }
 
-/* Animate once on arrival; learning controls remain steady during use. */
+/* ---------- Hero ---------- */
 @keyframes hero-arrive {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
@@ -182,10 +285,79 @@
   .hero-visual { animation: hero-arrive 800ms 120ms ease-out both; }
 }
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  a.group:focus-visible,
-  article.group:focus-within {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgb(15 23 42 / 0.09);
-  }
+/* ---------- Đăng nhập / Đăng ký ---------- */
+.auth-bg {
+  background: radial-gradient(circle at 8% 12%, #ffe3ea 0, transparent 30%),
+    radial-gradient(circle at 92% 18%, #dff4ff 0, transparent 34%),
+    radial-gradient(circle at 78% 96%, #fff4cc 0, transparent 34%),
+    radial-gradient(circle at 12% 92%, #e5f8d4 0, transparent 30%), #f7f9ff;
+}
+.auth-tab-pill[data-mode="register"] { transform: translateX(100%); }
+.strength-bar { transition: background-color 300ms ease; }
+
+@keyframes auth-card-in {
+  from { opacity: 0; transform: translateY(32px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes auth-item-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pill-to-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes pill-to-left {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+/* Hai bản giống nhau để mỗi lần gửi sai đều rung lại. */
+@keyframes shake-a {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(2px); }
+}
+@keyframes shake-b {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(2px); }
+}
+@keyframes confetti-burst {
+  0% { opacity: 1; transform: translate(-50%, -50%) rotate(0) scale(0.5); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)) scale(1); }
+}
+@keyframes success-pop {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .auth-hero { animation: auth-card-in 650ms cubic-bezier(0.22, 1.2, 0.36, 1) backwards; }
+  .auth-card { animation: auth-card-in 650ms 120ms cubic-bezier(0.22, 1.2, 0.36, 1) backwards; }
+  .auth-stagger > * { animation: auth-item-in 450ms ease-out backwards; }
+  .auth-stagger > :nth-child(1) { animation-delay: 300ms; }
+  .auth-stagger > :nth-child(2) { animation-delay: 360ms; }
+  .auth-stagger > :nth-child(3) { animation-delay: 420ms; }
+  .auth-stagger > :nth-child(4) { animation-delay: 480ms; }
+  .auth-stagger > :nth-child(5) { animation-delay: 540ms; }
+  .auth-stagger > :nth-child(6) { animation-delay: 600ms; }
+  .auth-stagger > :nth-child(7) { animation-delay: 660ms; }
+  .auth-stagger > :nth-child(n + 8) { animation-delay: 720ms; }
+  .auth-perk { animation: auth-item-in 500ms ease-out backwards; }
+  .auth-perk:nth-child(1) { animation-delay: 450ms; }
+  .auth-perk:nth-child(2) { animation-delay: 570ms; }
+  .auth-perk:nth-child(3) { animation-delay: 690ms; }
+  .auth-tab-pill[data-mode="login"] { animation: pill-to-left 450ms cubic-bezier(0.34, 1.4, 0.64, 1) backwards; }
+  .auth-tab-pill[data-mode="register"] { animation: pill-to-right 450ms cubic-bezier(0.34, 1.4, 0.64, 1) backwards; }
+  .auth-form[data-shake="a"] .auth-control:has([aria-invalid="true"]) { animation: shake-a 420ms ease-in-out; }
+  .auth-form[data-shake="b"] .auth-control:has([aria-invalid="true"]) { animation: shake-b 420ms ease-in-out; }
+  .confetti-piece { animation: confetti-burst 950ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .auth-success { animation: success-pop 400ms ease-out; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti { display: none; }
 }

@@ -16,7 +16,7 @@ export function useLumiReaction(listen = true) {
   useEffect(() => {
     const listener = (event: Event) => {
       const cue = (event as CustomEvent<LumiCue>).detail;
-      if (cue && ["wave", "celebrate", "encourage", "curious"].includes(cue.mood)) react(cue.mood, cue.message);
+      if (cue && ["wave", "celebrate", "encourage", "curious", "happy"].includes(cue.mood)) react(cue.mood, cue.message);
     };
     if (listen) window.addEventListener(LUMI_EVENT, listener);
     return () => { window.removeEventListener(LUMI_EVENT, listener); clearTimeout(timeout.current); };

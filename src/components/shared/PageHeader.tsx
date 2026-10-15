@@ -13,12 +13,14 @@ interface PageHeaderProps {
 /** Banner đầu trang cho các trang nội dung. */
 export function PageHeader({ title, description, breadcrumbs, children }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(79,70,229,0.45),transparent_55%),radial-gradient(circle_at_10%_90%,rgba(6,182,212,0.25),transparent_50%)]" />
+    <section data-no-reveal className="relative overflow-hidden bg-gradient-to-br from-primary via-[#5a3ff0] to-grape text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(255,200,0,0.35),transparent_40%),radial-gradient(circle_at_8%_95%,rgba(28,176,246,0.45),transparent_45%)]" />
+      <div aria-hidden className="pointer-events-none absolute -right-10 bottom-6 hidden size-24 rotate-12 rounded-3xl bg-sun/80 shadow-[0_6px_0_var(--color-sun-shade)] float-y md:block" />
+      <div aria-hidden className="pointer-events-none absolute right-32 top-8 hidden size-10 rounded-full bg-coral/90 float-y-slow md:block" />
       <Container className="relative py-12 lg:py-16">
         {breadcrumbs && (
           <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex flex-wrap items-center gap-1 text-sm text-slate-300">
+            <ol className="flex flex-wrap items-center gap-1 text-sm font-semibold text-indigo-100">
               <li>
                 <Link to="/" className="hover:text-white">Trang chủ</Link>
               </li>
@@ -31,8 +33,8 @@ export function PageHeader({ title, description, breadcrumbs, children }: PageHe
             </ol>
           </nav>
         )}
-        <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
-        {description && <p className="mt-3 max-w-2xl text-base text-slate-300 sm:text-lg">{description}</p>}
+        <h1 className="max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">{title}</h1>
+        {description && <p className="mt-3 max-w-2xl text-base font-medium text-indigo-50 sm:text-lg">{description}</p>}
         {children && <div className="mt-6">{children}</div>}
       </Container>
     </section>

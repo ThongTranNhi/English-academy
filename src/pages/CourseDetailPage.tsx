@@ -8,7 +8,7 @@ import { courseCategoryLabels } from "@/data/categories";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Container } from "@/components/shared/Container";
 import { Avatar } from "@/components/shared/Avatar";
-import { CoverArt } from "@/components/shared/CoverArt";
+import { CourseCover } from "@/features/courses/CourseCover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CourseCard } from "@/features/courses/CourseCard";
@@ -90,7 +90,7 @@ export default function CourseDetailPage() {
             <section aria-labelledby="teacher-heading" className="rounded-[14px] border border-slate-200 bg-white p-6">
               <h2 id="teacher-heading" className="mb-4 text-xl font-bold">Giảng viên</h2>
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Avatar name={teacher.name} tone={teacher.tone} size="lg" />
+                <Avatar name={teacher.name} tone={teacher.tone} src={teacher.photo} size="lg" />
                 <div>
                   <Link to={`/teachers/${teacher.slug}`} className="text-lg font-semibold hover:text-primary">{teacher.name}</Link>
                   <p className="text-sm text-primary">{teacher.title}</p>
@@ -103,7 +103,7 @@ export default function CourseDetailPage() {
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="overflow-hidden rounded-[16px] border border-slate-200 bg-white shadow-lg">
-            <CoverArt tone={course.tone} icon="GraduationCap" className="aspect-video" />
+            <CourseCover course={course} priority className="aspect-video" />
             <div className="p-6">
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-extrabold text-primary">{formatPrice(course.price)}</span>

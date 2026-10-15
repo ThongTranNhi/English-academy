@@ -7,7 +7,8 @@ import { SocialIcons } from "@/components/shared/SocialIcons";
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-slate-300">
+    <footer className="bg-night text-slate-300">
+      <div aria-hidden className="rainbow-bar h-2" />
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_repeat(4,1fr)] lg:py-16">
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo invert />
@@ -16,8 +17,8 @@ export function Footer() {
           </p>
           <ul className="mt-5 space-y-2 text-sm text-slate-400">
             <li className="flex items-center gap-2"><MapPin className="size-4 shrink-0" aria-hidden /> Hà Nội, Việt Nam</li>
-            <li className="flex items-center gap-2"><Phone className="size-4 shrink-0" aria-hidden /> 1900 0000</li>
-            <li className="flex items-center gap-2"><Mail className="size-4 shrink-0" aria-hidden /> hello@englishacademy.vn</li>
+            <li className="flex items-center gap-2"><Phone className="size-4 shrink-0" aria-hidden /> 0396 098 034</li>
+            <li className="flex items-center gap-2"><Mail className="size-4 shrink-0" aria-hidden /> jathong0107@gmail.com</li>
           </ul>
           <div className="mt-6">
             <SocialIcons />
@@ -25,11 +26,11 @@ export function Footer() {
         </div>
         {footerColumns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">{col.title}</h2>
+            <h2 className="mb-4 text-sm font-extrabold uppercase tracking-wider text-sun">{col.title}</h2>
             <ul className="space-y-2.5 text-sm">
               {col.links.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.href} className="text-slate-400 transition-colors hover:text-white">{link.label}</Link>
+                  <Link to={link.href} className="text-slate-300 transition-colors hover:text-sky">{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -38,7 +39,7 @@ export function Footer() {
       </Container>
       <div className="border-t border-white/10">
         <Container className="flex flex-col gap-2 py-6 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} English Academy. Bảo lưu mọi quyền.</p>
+          <p>© {new Date().getFullYear()} English Academy · jathong · ThongTranNhi. Bảo lưu mọi quyền.</p>
           <p>Thông tin pháp lý: Giấy phép hoạt động giáo dục – đang cập nhật.</p>
         </Container>
       </div>
