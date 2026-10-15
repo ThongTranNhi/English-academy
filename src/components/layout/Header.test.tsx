@@ -80,7 +80,7 @@ describe("Header", () => {
     renderWithRouter(<Header />);
 
     await user.keyboard("{Control>}k{/Control}");
-    const dialog = screen.getByRole("dialog", { name: "Tìm kiếm" });
+    const dialog = await screen.findByRole("dialog", { name: "Tìm kiếm" });
     const input = within(dialog).getByRole("searchbox", { name: "Từ khóa tìm kiếm" });
     expect(input).toHaveFocus();
 
@@ -97,7 +97,7 @@ describe("Header", () => {
     renderWithRouter(<Header />);
 
     await user.click(screen.getByRole("button", { name: /Tìm kiếm/ }));
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });

@@ -71,7 +71,23 @@ Màu và font được khai báo trong `src/styles/index.css` (`@theme`): `prima
 
 ## Sitemap
 
-`/` · `/courses` · `/courses/:slug` · `/learning/:slug` · `/learning-paths` · `/listening` · `/speaking` · `/reading` · `/writing` · `/vocabulary` · `/grammar` · `/practice` · `/library` · `/teachers` · `/teachers/:slug` · `/dashboard` · `/login` · `/register` · `/search?q=` · `/help/:slug` (about, contact, faq, terms, privacy, refund)
+`/` · `/courses` · `/courses/:slug` · `/learning/:slug` · `/learning-paths` · `/placement-test` · `/listening` · `/speaking` · `/reading` · `/writing` · `/vocabulary` · `/grammar` · `/practice` · `/library` · `/teachers` · `/teachers/:slug` · `/dashboard` · `/login` · `/register` · `/search?q=` · `/help/:slug` (about, contact, faq, terms, privacy, refund)
+
+## Tính năng học tập
+
+- **Nội dung bài học:** mọi bài trong đề cương đều có nội dung, từ vựng và quiz; bài audio/video có transcript. Dữ liệu ở `src/data/lessons.ts` và `src/data/lesson-content/*`; test toàn vẹn (`src/data/integrity.test.ts`) chặn bài thiếu nội dung hoặc còn văn bản giữ chỗ.
+- **Trình phát bài học** (`features/lessons/LessonPlayer.tsx`): đọc transcript bằng giọng đọc trình duyệt, tô sáng câu đang đọc, phụ đề trên ảnh bìa, đổi tốc độ 0.75x–1.25x. Khi có file video/audio thật có thể thay phần giọng đọc bằng thẻ `<video>/<audio>`.
+- **Test xếp lớp CEFR** (`/placement-test`): 18 câu (3 câu/cấp, dữ liệu ở `src/data/placement.ts`), xếp theo bậc thang – cấp đạt khi đúng ≥ 2/3; gợi ý lộ trình và khóa học.
+- **Ôn từ vựng lặp lại ngắt quãng** (`/vocabulary#review`): biến thể SM-2 (`features/vocabulary/srs.ts`) với 4 mức Quên/Khó/Nhớ/Dễ, mỗi phiên gồm từ đến hạn + tối đa 5 từ mới.
+- **Chuỗi ngày học & mục tiêu ngày** (Dashboard): XP cho bài học (+20), quiz (+10, đạt 100% +5), ôn từ (+2), thuộc từ (+2), test xếp lớp (+15); mỗi sự kiện chỉ cộng một lần. Logic ở `features/progress/streak.ts`.
+
+Toàn bộ tiến độ lưu trong `localStorage` (store `src/store/progressStore.ts`).
+
+## SEO & tốc độ tải
+
+- Mỗi trang cập nhật `title`, `description`, Open Graph và canonical (`usePageMeta`); trang khóa học có JSON-LD `Course`, `index.html` có JSON-LD `EducationalOrganization`.
+- Khi build, plugin `build/seoPlugin.ts` sinh `robots.txt` (chặn trang demo). Nếu đặt biến môi trường **`SITE_URL`** (vd. `https://<project>.pages.dev` – trên Cloudflare Pages: Settings → Environment variables), plugin sinh thêm `sitemap.xml` (mọi khóa học, bài học, giảng viên) và thẻ `og:image`/`og:url`/canonical tuyệt đối.
+- Hộp tìm kiếm và dữ liệu bài học được lazy-load, nên bundle chính không chứa nội dung bài học.
 
 ## Deploy Cloudflare Pages
 
@@ -93,7 +109,7 @@ Deploy bằng **Cloudflare Pages Git integration** (không dùng GitHub Actions 
 
 - **Dữ liệu mẫu:** khóa học, giá, số học viên, giảng viên và phản hồi học viên (`src/data/*`) đều là dữ liệu minh họa. Hãy thay bằng dữ liệu thật; chỉ đặt `verified: true` trong `testimonials.ts` khi đã đối chiếu kết quả.
 - **Đăng nhập/Đăng ký** là mô phỏng: không tạo tài khoản, không lưu mật khẩu, không gửi dữ liệu. Phiên mất khi tải lại trang.
-- **Tiến độ học** (bài hoàn thành, từ đã thuộc, điểm quiz) lưu trong `localStorage` của trình duyệt.
-- **Audio/phát âm** dùng Web Speech API của trình duyệt; video/audio bài giảng hiện là khung giữ chỗ. Đặt file thật vào `public/audio`, `public/images`.
+- **Tiến độ học** (bài hoàn thành, từ đã thuộc, điểm quiz, XP/streak, lịch ôn từ, kết quả xếp lớp) lưu trong `localStorage` của trình duyệt.
+- **Audio/phát âm** dùng Web Speech API của trình duyệt (giọng đọc tự động, chất lượng tùy trình duyệt/hệ điều hành). Khi có bản ghi thật, đặt file vào `public/audio`, `public/videos`.
 - Link mạng xã hội trong footer (`SocialIcons.tsx`) đang là `#`. Nội dung điều khoản/bảo mật trong `data/info.ts` là bản nháp.
-- SEO: mỗi trang tự đặt `title` và `meta description` (`usePageMeta`). Nếu cần SEO chuyên sâu, thêm prerender (ví dụ `vite-plugin-prerender` hoặc chuyển sang SSG).
+- SEO: xem mục **SEO & tốc độ tải**. Nếu cần SEO chuyên sâu (crawler không chạy JavaScript), thêm prerender hoặc chuyển sang SSG.

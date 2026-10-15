@@ -1,0 +1,281 @@
+import type { Lesson } from "@/types";
+
+/** Bài học các khóa TOEIC: 650+, Starter 450+, Master 850+, Speaking & Writing. */
+export const toeicLessons: Lesson[] = [
+  {
+    slug: "toeic-part2-questions", courseSlug: "toeic-650-plus",
+    title: "Part 2: Hỏi – Đáp", type: "audio", durationMinutes: 14,
+    summary: "Nhận diện câu hỏi Wh-, Yes/No và câu trả lời gián tiếp.",
+    content: [
+      "Part 2 có 25 câu: nghe một câu hỏi và 3 lựa chọn trả lời, không có gì in trong đề.",
+      "Tập trung vào TỪ ĐẦU câu hỏi: When → thời gian, Where → địa điểm, Who → người/phòng ban.",
+      "Bẫy âm giống: câu hỏi có “copy”, đáp án sai có “coffee”. Đáp án lặp lại từ trong câu hỏi thường là bẫy.",
+      "Câu trả lời gián tiếp thường đúng: “When is the meeting?” → “Let me check the schedule.”",
+    ],
+    transcript: [
+      { time: "00:00", text: "Number seven. Where should I put these boxes?" },
+      { time: "00:04", text: "(A) In the storage room, please." },
+      { time: "00:07", text: "(B) They're about ten kilos." },
+      { time: "00:10", text: "(C) I put it on the box." },
+      { time: "00:14", text: "Number eight. Who's leading the training session tomorrow?" },
+      { time: "00:18", text: "(A) At nine o'clock. (B) I think Ms. Tanaka is. (C) The train was late." },
+    ],
+    vocabulary: [
+      { word: "storage room", meaning: "phòng kho" },
+      { word: "lead a session", meaning: "chủ trì một buổi" },
+      { word: "indirect answer", meaning: "câu trả lời gián tiếp" },
+      { word: "schedule", meaning: "lịch trình" },
+    ],
+    quiz: [
+      { id: "q1", question: "Câu 7: đáp án đúng là?", options: ["(A)", "(B)", "(C)"], answer: 0 },
+      { id: "q2", question: "Câu 8: đáp án đúng là?", options: ["(A)", "(B)", "(C)"], answer: 1, explanation: "Hỏi “Who” → trả lời bằng người: Ms. Tanaka." },
+      { id: "q3", question: "Vì sao (C) ở câu 8 là bẫy?", options: ["Sai thì động từ", "“train” nghe giống “training”", "Quá dài"], answer: 1 },
+    ],
+  },
+  {
+    slug: "toeic-part5-grammar", courseSlug: "toeic-650-plus",
+    title: "Part 5: Ngữ pháp trọng tâm", type: "exercise", durationMinutes: 20,
+    summary: "Từ loại, thì động từ và giới từ thường gặp.",
+    content: [
+      "Part 5 có 30 câu điền từ – mục tiêu làm trong 10 phút để dành thời gian cho Part 7.",
+      "Nhìn 4 đáp án trước: nếu cùng gốc từ (decide/decision/decisive/decisively) → câu hỏi từ loại, chỉ cần xét vị trí trống.",
+      "Sau mạo từ/tính từ sở hữu → danh từ; trước danh từ → tính từ; bổ nghĩa động từ → trạng từ.",
+      "Giới từ thời gian: “by Friday” (hạn chót), “until Friday” (kéo dài đến), “within two days” (trong vòng).",
+    ],
+    vocabulary: [
+      { word: "deadline", meaning: "hạn chót" },
+      { word: "submit", meaning: "nộp" },
+      { word: "approval", meaning: "sự phê duyệt" },
+      { word: "promptly", meaning: "ngay lập tức, đúng giờ" },
+    ],
+    quiz: [
+      { id: "q1", question: "Please submit the report ___ Friday at the latest.", options: ["until", "by", "during", "since"], answer: 1 },
+      { id: "q2", question: "The manager gave final ___ for the new design.", options: ["approve", "approved", "approval", "approvingly"], answer: 2 },
+      { id: "q3", question: "All staff must respond ___ to customer complaints.", options: ["prompt", "promptly", "promptness", "prompted"], answer: 1 },
+    ],
+  },
+  {
+    slug: "starter-test-format", courseSlug: "toeic-starter-450",
+    title: "Cấu trúc đề TOEIC Listening & Reading", type: "video", durationMinutes: 12, free: true,
+    summary: "200 câu, 2 giờ và cách tính điểm.",
+    content: [
+      "Listening (45 phút, 100 câu): Part 1 mô tả tranh (6), Part 2 hỏi – đáp (25), Part 3 hội thoại (39), Part 4 bài nói ngắn (30).",
+      "Reading (75 phút, 100 câu): Part 5 điền câu (30), Part 6 điền đoạn văn (16), Part 7 đọc hiểu (54).",
+      "Điểm mỗi phần từ 5 đến 495, tổng tối đa 990. Không trừ điểm câu sai – đừng bỏ trống câu nào.",
+      "Mốc tham khảo: 450 là giao tiếp cơ bản trong công việc, 650 thường là yêu cầu tốt nghiệp đại học, 850+ là thành thạo.",
+    ],
+    transcript: [
+      { time: "00:00", text: "Welcome to TOEIC Starter. Let's look at how the test is organised." },
+      { time: "00:06", text: "The Listening section has four parts and takes about forty-five minutes." },
+      { time: "00:13", text: "The Reading section has three parts, and you have seventy-five minutes to finish it." },
+      { time: "00:21", text: "There's no penalty for wrong answers, so always choose an option, even if you have to guess." },
+    ],
+    vocabulary: [
+      { word: "section", meaning: "phần thi" },
+      { word: "penalty", meaning: "hình phạt, sự trừ điểm" },
+      { word: "guess", meaning: "đoán" },
+      { word: "organise", meaning: "sắp xếp, tổ chức" },
+    ],
+    quiz: [
+      { id: "q1", question: "Phần Reading kéo dài bao lâu?", options: ["45 phút", "60 phút", "75 phút"], answer: 2 },
+      { id: "q2", question: "Có nên bỏ trống câu chưa chắc chắn?", options: ["Có, để tránh bị trừ điểm", "Không, vì sai không bị trừ điểm", "Tùy phần thi"], answer: 1 },
+      { id: "q3", question: "Part nào có nhiều câu nhất?", options: ["Part 7", "Part 2", "Part 5"], answer: 0 },
+    ],
+  },
+  {
+    slug: "starter-office-vocabulary", courseSlug: "toeic-starter-450",
+    title: "Từ vựng văn phòng cơ bản", type: "exercise", durationMinutes: 15,
+    summary: "50 từ về phòng ban, thiết bị và lịch họp.",
+    content: [
+      "Phòng ban: Human Resources (nhân sự), Accounting (kế toán), Marketing, Sales (kinh doanh), IT Support.",
+      "Thiết bị: photocopier, printer, projector, filing cabinet, stationery (văn phòng phẩm).",
+      "Lịch họp: schedule/reschedule a meeting, postpone (hoãn), agenda (chương trình họp), minutes (biên bản).",
+      "Mẹo: học theo cụm có ngữ cảnh, ví dụ “The printer on the third floor is out of order.”",
+    ],
+    vocabulary: [
+      { word: "postpone", meaning: "hoãn lại" },
+      { word: "agenda", meaning: "chương trình họp" },
+      { word: "stationery", meaning: "văn phòng phẩm" },
+      { word: "out of order", meaning: "bị hỏng" },
+    ],
+    quiz: [
+      { id: "q1", question: "Phòng nào phụ trách tuyển dụng?", options: ["Accounting", "Human Resources", "IT Support"], answer: 1 },
+      { id: "q2", question: "“The meeting has been ___ until next week.”", options: ["postponed", "printed", "filed"], answer: 0 },
+      { id: "q3", question: "“Minutes of the meeting” là gì?", options: ["Số phút họp", "Biên bản cuộc họp", "Thời gian nghỉ"], answer: 1 },
+    ],
+  },
+  {
+    slug: "starter-word-forms", courseSlug: "toeic-starter-450",
+    title: "Từ loại: danh, động, tính, trạng", type: "exercise", durationMinutes: 18,
+    summary: "Nhận diện vị trí từ loại trong câu Part 5.",
+    content: [
+      "Đuôi danh từ: -tion, -ment, -ness, -ity, -er/-or. Ví dụ: production, payment, employee.",
+      "Đuôi tính từ: -ful, -ive, -able, -al, -ous. Ví dụ: successful, effective, available.",
+      "Đuôi trạng từ: thường là tính từ + -ly: successfully, effectively.",
+      "Vị trí: the + (adj) + NOUN; be + ADJ; ADV + verb hoặc verb + ADV.",
+    ],
+    vocabulary: [
+      { word: "available", meaning: "có sẵn" },
+      { word: "effective", meaning: "hiệu quả" },
+      { word: "employee", meaning: "nhân viên" },
+      { word: "production", meaning: "sự sản xuất" },
+    ],
+    quiz: [
+      { id: "q1", question: "The new software is very ___.", options: ["effect", "effective", "effectively"], answer: 1 },
+      { id: "q2", question: "Ms. Lee completed the project ___.", options: ["success", "successful", "successfully"], answer: 2 },
+      { id: "q3", question: "We are pleased to announce the ___ of our new branch.", options: ["open", "opening", "opened"], answer: 1 },
+    ],
+  },
+  {
+    slug: "master-part3-inference", courseSlug: "toeic-master-850",
+    title: "Part 3: Câu hỏi suy luận", type: "audio", durationMinutes: 18, free: true,
+    summary: "Bắt ý ngầm và ý định của người nói.",
+    content: [
+      "Câu hỏi suy luận: “What does the man imply when he says…?”, “What will the woman most likely do next?”.",
+      "Đáp án hiếm khi lặp lại nguyên văn – nó diễn đạt lại ý ngầm của người nói.",
+      "Với câu “What will … do next?”, đáp án thường nằm ở 1–2 câu cuối hội thoại.",
+      "Đọc trước 3 câu hỏi trong lúc nghe hướng dẫn để biết cần bắt thông tin gì.",
+    ],
+    transcript: [
+      { time: "00:00", speaker: "Woman", text: "Hi Mark, are the brochures for the trade fair ready?" },
+      { time: "00:04", speaker: "Man", text: "Well, the printer only delivered half of them this morning." },
+      { time: "00:09", speaker: "Woman", text: "The fair starts on Thursday. That's cutting it close." },
+      { time: "00:13", speaker: "Man", text: "I know. I'll call them right now and ask for express delivery." },
+    ],
+    vocabulary: [
+      { word: "brochure", meaning: "tờ quảng cáo, catalogue" },
+      { word: "trade fair", meaning: "hội chợ thương mại" },
+      { word: "cutting it close", meaning: "sát giờ, suýt soát" },
+      { word: "express delivery", meaning: "giao hàng nhanh" },
+    ],
+    quiz: [
+      { id: "q1", question: "Người phụ nữ ngụ ý gì khi nói “That's cutting it close”?", options: ["Hội chợ bị hủy", "Thời gian còn rất ít", "Tờ rơi quá đắt"], answer: 1 },
+      { id: "q2", question: "Người đàn ông sẽ làm gì tiếp theo?", options: ["Gọi cho nhà in", "Đi hội chợ", "In thêm tại văn phòng"], answer: 0 },
+    ],
+  },
+  {
+    slug: "master-part4-talks", courseSlug: "toeic-master-850",
+    title: "Part 4: Thông báo & quảng cáo", type: "audio", durationMinutes: 16,
+    summary: "Dự đoán nội dung từ câu hỏi trước khi nghe.",
+    content: [
+      "Part 4 gồm 10 bài nói ngắn: thông báo sân bay, quảng cáo, tin nhắn thoại, giới thiệu diễn giả…",
+      "Câu hỏi đầu thường hỏi mục đích hoặc người nghe là ai – nghe kỹ 2 câu đầu.",
+      "Câu hỏi có “graphic” (bảng, lịch trình): nhìn biểu đồ trước, đáp án cần kết hợp thông tin nghe và nhìn.",
+      "Các cụm báo hiệu: “I'm calling to…”, “Please note that…”, “Don't miss…”.",
+    ],
+    transcript: [
+      { time: "00:00", text: "Attention, passengers on flight VN two-four-seven to Singapore." },
+      { time: "00:05", text: "Due to a technical inspection, boarding will now begin at gate fourteen instead of gate nine." },
+      { time: "00:13", text: "The departure time has been moved to six forty-five p.m." },
+      { time: "00:19", text: "Passengers who need assistance are invited to board first. We apologise for the inconvenience." },
+    ],
+    vocabulary: [
+      { word: "boarding", meaning: "việc lên máy bay" },
+      { word: "inspection", meaning: "sự kiểm tra" },
+      { word: "departure", meaning: "sự khởi hành" },
+      { word: "inconvenience", meaning: "sự bất tiện" },
+    ],
+    quiz: [
+      { id: "q1", question: "Chuyến bay đổi sang cửa nào?", options: ["Cửa 9", "Cửa 14", "Cửa 24"], answer: 1 },
+      { id: "q2", question: "Lý do thay đổi là gì?", options: ["Thời tiết xấu", "Kiểm tra kỹ thuật", "Thiếu phi hành đoàn"], answer: 1 },
+      { id: "q3", question: "Giờ khởi hành mới là?", options: ["6:45 p.m.", "6:15 p.m.", "7:45 p.m."], answer: 0 },
+    ],
+  },
+  {
+    slug: "master-part7-multiple-passages", courseSlug: "toeic-master-850",
+    title: "Part 7: Đoạn đọc kép và ba", type: "reading", durationMinutes: 24,
+    summary: "Liên kết thông tin giữa email, lịch trình và biểu mẫu.",
+    content: [
+      "Mỗi bộ đoạn kép/ba có 5 câu hỏi, ít nhất 1 câu yêu cầu kết hợp thông tin từ 2 văn bản.",
+      "Đọc câu hỏi trước, gạch tên riêng/ngày/số để biết cần quét văn bản nào.",
+      "Ví dụ: Email 1 – “Our team of 12 will arrive on 3 June.” Bảng giá – “Groups of 10+ receive a 15% discount.” → Câu hỏi về giảm giá cần cả hai.",
+      "Quản lý thời gian: trung bình 1 phút/câu; nếu kẹt quá 2 phút, đánh dấu và quay lại sau.",
+    ],
+    vocabulary: [
+      { word: "itinerary", meaning: "lịch trình" },
+      { word: "discount", meaning: "sự giảm giá" },
+      { word: "confirm", meaning: "xác nhận" },
+      { word: "attachment", meaning: "tệp đính kèm" },
+    ],
+    quiz: [
+      { id: "q1", question: "Theo ví dụ, nhóm 12 người được giảm bao nhiêu?", options: ["10%", "12%", "15%"], answer: 2 },
+      { id: "q2", question: "Khi kẹt một câu quá 2 phút, nên làm gì?", options: ["Đánh dấu và quay lại sau", "Bỏ cả bộ câu", "Đọc lại toàn bài"], answer: 0 },
+    ],
+  },
+  {
+    slug: "sw-read-aloud", courseSlug: "toeic-speaking-writing",
+    title: "Read a Text Aloud", type: "audio", durationMinutes: 10, free: true,
+    summary: "Ngắt nghỉ, trọng âm và ngữ điệu khi đọc to.",
+    content: [
+      "Có 45 giây chuẩn bị và 45 giây đọc. Được chấm phát âm, ngữ điệu và trọng âm.",
+      "Ngắt hơi ở dấu phẩy, dấu chấm và trước các cụm giới từ dài.",
+      "Liệt kê: giọng lên ở các mục đầu, xuống ở mục cuối – “coffee↗, tea↗, and juice↘”.",
+      "Nhấn mạnh từ mang thông tin: tên riêng, số liệu, tính từ quan trọng.",
+    ],
+    transcript: [
+      { time: "00:00", text: "Thank you for calling Green Valley Hotel." },
+      { time: "00:04", text: "Our restaurant is open daily from seven a.m. to ten p.m." },
+      { time: "00:10", text: "Guests can enjoy free Wi-Fi, a fitness centre, and an outdoor swimming pool." },
+      { time: "00:17", text: "To make a reservation, please press one, or stay on the line to speak to our staff." },
+    ],
+    vocabulary: [
+      { word: "intonation", meaning: "ngữ điệu" },
+      { word: "pause", meaning: "ngắt nghỉ" },
+      { word: "reservation", meaning: "việc đặt chỗ" },
+      { word: "stay on the line", meaning: "giữ máy" },
+    ],
+    quiz: [
+      { id: "q1", question: "Khi liệt kê, giọng ở mục cuối thường thế nào?", options: ["Đi lên", "Đi xuống", "Giữ ngang"], answer: 1 },
+      { id: "q2", question: "Thời gian chuẩn bị là bao lâu?", options: ["30 giây", "45 giây", "60 giây"], answer: 1 },
+    ],
+  },
+  {
+    slug: "sw-describe-picture", courseSlug: "toeic-speaking-writing",
+    title: "Describe a Picture", type: "video", durationMinutes: 12,
+    summary: "Khung mô tả tranh trong 45 giây.",
+    content: [
+      "Khung 4 bước: Tổng quan (đây là đâu) → Người/vật chính → Chi tiết xung quanh → Cảm nhận/suy đoán.",
+      "Dùng hiện tại tiếp diễn cho hành động: “A woman is pointing at a screen.”",
+      "Cụm vị trí: in the foreground (phía trước), in the background (phía sau), on the left/right.",
+      "Câu suy đoán kết thúc: “It seems to be a busy morning at the office.”",
+    ],
+    transcript: [
+      { time: "00:00", text: "This picture was taken in a modern office." },
+      { time: "00:04", text: "In the foreground, a woman in a blue jacket is pointing at a chart on the screen." },
+      { time: "00:11", text: "Three colleagues are sitting around the table, taking notes on their laptops." },
+      { time: "00:17", text: "In the background, I can see a large window with a view of the city." },
+      { time: "00:23", text: "It seems that they are discussing the company's sales results." },
+    ],
+    vocabulary: [
+      { word: "foreground", meaning: "tiền cảnh, phía trước" },
+      { word: "background", meaning: "hậu cảnh, phía sau" },
+      { word: "point at", meaning: "chỉ vào" },
+      { word: "take notes", meaning: "ghi chép" },
+    ],
+    quiz: [
+      { id: "q1", question: "Thì phù hợp để mô tả hành động trong tranh?", options: ["Quá khứ đơn", "Hiện tại tiếp diễn", "Tương lai đơn"], answer: 1 },
+      { id: "q2", question: "“It seems that…” thuộc bước nào?", options: ["Tổng quan", "Chi tiết", "Suy đoán"], answer: 2 },
+    ],
+  },
+  {
+    slug: "sw-respond-email", courseSlug: "toeic-speaking-writing",
+    title: "Respond to a Written Request", type: "reading", durationMinutes: 16,
+    summary: "Trả lời email đủ 3 yêu cầu trong 10 phút.",
+    content: [
+      "Đề yêu cầu trả lời email kèm 2–3 nhiệm vụ cụ thể, ví dụ: “ask TWO questions and make ONE suggestion”.",
+      "Cấu trúc: Lời chào → Câu mở đầu nêu mục đích → Lần lượt từng nhiệm vụ (mỗi nhiệm vụ một đoạn ngắn) → Kết thư.",
+      "Đánh số hoặc dùng từ nối rõ ràng để giám khảo dễ thấy bạn làm đủ nhiệm vụ: “Firstly, could you…? Secondly, …”.",
+      "Mẫu mở đầu: “Thank you for your email about the upcoming workshop. I would like to ask a few questions.”",
+    ],
+    vocabulary: [
+      { word: "upcoming", meaning: "sắp tới" },
+      { word: "suggestion", meaning: "đề xuất" },
+      { word: "regarding", meaning: "về việc" },
+      { word: "look forward to", meaning: "mong đợi" },
+    ],
+    quiz: [
+      { id: "q1", question: "Lỗi khiến bài bị điểm thấp nhất là gì?", options: ["Thiếu một nhiệm vụ đề yêu cầu", "Email hơi ngắn", "Dùng từ nối"], answer: 0 },
+      { id: "q2", question: "Câu kết thư phù hợp là:", options: ["See ya!", "I look forward to hearing from you.", "Reply now."], answer: 1 },
+    ],
+  },
+];

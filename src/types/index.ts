@@ -62,7 +62,8 @@ export interface Lesson {
   durationMinutes: number;
   summary: string;
   content: string[];
-  transcript?: { time: string; text: string }[];
+  /** `speaker` dùng cho bài hội thoại (vd. "A", "Receptionist"). */
+  transcript?: { time: string; text: string; speaker?: string }[];
   vocabulary?: { word: string; meaning: string }[];
   quiz?: QuizQuestion[];
   free?: boolean;

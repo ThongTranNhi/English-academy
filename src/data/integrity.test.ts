@@ -80,6 +80,20 @@ describe("dữ liệu mẫu", () => {
     expect(courses.filter((c) => c.featured)).toHaveLength(8);
   });
 
+  it("mọi bài học có nội dung đầy đủ, không còn văn bản giữ chỗ", () => {
+    for (const l of lessons) {
+      expect(l.content.length, l.slug).toBeGreaterThanOrEqual(3);
+      expect(l.vocabulary?.length ?? 0, l.slug).toBeGreaterThanOrEqual(3);
+      expect(l.quiz?.length ?? 0, l.slug).toBeGreaterThanOrEqual(2);
+      expect(l.content.join(" "), l.slug).not.toMatch(/sẽ được cập nhật|đang cập nhật|lorem ipsum/i);
+      if (l.type === "video" || l.type === "audio") expect(l.transcript?.length ?? 0, `${l.slug} cần transcript cho trình phát`).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it("lựa chọn trong mỗi câu quiz không trùng nhau", () => {
+    for (const q of lessons.flatMap((l) => l.quiz ?? [])) expect(duplicates(q.options), q.question).toEqual([]);
+  });
+
   it("đáp án quiz nằm trong danh sách lựa chọn", () => {
     const quizzes = [...lessons.flatMap((l) => l.quiz ?? []), ...grammarLessons.flatMap((g) => g.exercises)];
     for (const q of quizzes) {

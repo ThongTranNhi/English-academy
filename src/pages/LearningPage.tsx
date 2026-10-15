@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Lock, PlayCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Lock } from "lucide-react";
 import { getLesson } from "@/data/lessons";
 import { getCourse } from "@/data/courses";
 import { Container } from "@/components/shared/Container";
@@ -10,6 +10,7 @@ import { SpeakButton } from "@/components/shared/SpeakButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TranscriptPanel } from "@/features/lessons/TranscriptPanel";
+import { LessonPlayer } from "@/features/lessons/LessonPlayer";
 import { useProgressStore } from "@/store/progressStore";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { cn } from "@/lib/utils";
@@ -31,6 +32,7 @@ export default function LearningPage() {
   const prev = idx > 0 ? outline[idx - 1] : undefined;
   const next = idx >= 0 && idx < outline.length - 1 ? outline[idx + 1] : undefined;
   const done = completed.includes(lesson.slug);
+  const isMedia = lesson.type === "video" || lesson.type === "audio";
 
   return (
     <Container className="grid gap-8 py-8 lg:grid-cols-[1fr_320px] lg:py-12">
@@ -50,16 +52,13 @@ export default function LearningPage() {
           <p className="mt-2 text-slate-600">{lesson.summary}</p>
         </div>
 
-        {(lesson.type === "video" || lesson.type === "audio") && (
-          <div className="relative overflow-hidden rounded-[16px]">
-            {course?.image ? <CourseCover course={course} priority className="aspect-video" /> : <CoverArt tone={course?.tone ?? "indigo"} icon={lesson.type === "video" ? "Video" : "Headphones"} className="aspect-video" />}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/30 text-white">
-              <PlayCircle className="size-16" aria-hidden />
-              <p className="rounded-full bg-navy/60 px-4 py-1.5 text-sm">
-                {lesson.type === "video" ? "Video bài giảng" : "Audio bài học"} sẽ được gắn khi có nội dung chính thức
-              </p>
-            </div>
-          </div>
+        {isMedia && lesson.transcript && (
+          <LessonPlayer
+            key={lesson.slug}
+            kind={lesson.type === "video" ? "video" : "audio"}
+            transcript={lesson.transcript}
+            cover={course?.image ? <CourseCover course={course} priority className="aspect-video" /> : <CoverArt tone={course?.tone ?? "indigo"} icon={lesson.type === "video" ? "Video" : "Headphones"} className="aspect-video" />}
+          />
         )}
 
         <section aria-labelledby="content-heading" className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">
@@ -73,7 +72,7 @@ export default function LearningPage() {
           </ul>
         </section>
 
-        {lesson.transcript && <TranscriptPanel transcript={lesson.transcript} />}
+        {!isMedia && lesson.transcript && <TranscriptPanel transcript={lesson.transcript} />}
 
         {lesson.vocabulary && (
           <section aria-labelledby="vocab-heading" className="rounded-[14px] border border-slate-200 bg-white p-5 sm:p-6">

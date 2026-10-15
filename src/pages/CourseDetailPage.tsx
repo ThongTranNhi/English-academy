@@ -12,7 +12,7 @@ import { CourseCover } from "@/features/courses/CourseCover";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CourseCard } from "@/features/courses/CourseCard";
-import { usePageMeta } from "@/hooks/usePageMeta";
+import { useJsonLd, usePageMeta } from "@/hooks/usePageMeta";
 import { formatPrice } from "@/lib/utils";
 import { useProgressStore } from "@/store/progressStore";
 import NotFoundPage from "./NotFoundPage";
@@ -24,6 +24,22 @@ export default function CourseDetailPage() {
   const course = getCourse(slug);
   const completed = useProgressStore((s) => s.completedLessons);
   usePageMeta(course?.title ?? "Không tìm thấy khóa học", course?.shortDescription);
+  useJsonLd(
+    course
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: course.title,
+          description: course.description,
+          educationalLevel: `CEFR ${course.level}`,
+          inLanguage: "en",
+          provider: { "@type": "EducationalOrganization", name: "English Academy" },
+          instructor: getTeacher(course.teacherSlug) ? { "@type": "Person", name: getTeacher(course.teacherSlug)!.name } : undefined,
+          aggregateRating: { "@type": "AggregateRating", ratingValue: course.rating, ratingCount: course.students },
+          offers: { "@type": "Offer", price: course.price, priceCurrency: "VND", category: course.price === 0 ? "Free" : "Paid" },
+        }
+      : null,
+  );
 
   if (!course) return <NotFoundPage />;
   const teacher = getTeacher(course.teacherSlug);

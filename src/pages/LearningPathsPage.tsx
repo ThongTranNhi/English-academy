@@ -14,6 +14,9 @@ export default function LearningPathsPage() {
   return (
     <>
       <PageHeader title="Lộ trình CEFR A1 – C2" description="Mỗi cấp độ có mục tiêu rõ ràng, năng lực đầu ra cụ thể và khóa học gợi ý." breadcrumbs={[{ label: "Lộ trình" }]}>
+        <Link to="/placement-test" className="mb-4 inline-flex items-center gap-2 rounded-2xl bg-sun px-5 py-2.5 text-sm font-extrabold text-navy shadow-[0_4px_0_var(--color-sun-shade)] hover:brightness-105">
+          Chưa biết trình độ? Làm test xếp lớp 8 phút →
+        </Link>
         <nav aria-label="Chuyển nhanh tới cấp độ" className="flex flex-wrap gap-2">
           {cefrLevels.map((l) => (
             <a key={l.level} href={`#${l.level.toLowerCase()}`} className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white hover:bg-white/20">{l.level}</a>

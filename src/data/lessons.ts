@@ -1,4 +1,9 @@
 import type { Lesson } from "@/types";
+import { ieltsLessons } from "./lesson-content/ielts";
+import { toeicLessons } from "./lesson-content/toeic";
+import { communicationLessons } from "./lesson-content/communication";
+import { businessLessons } from "./lesson-content/business";
+import { generalLessons } from "./lesson-content/general";
 
 /** Bài học đầy đủ nội dung mẫu. */
 const detailed: Lesson[] = [
@@ -85,6 +90,7 @@ const detailed: Lesson[] = [
     ],
     quiz: [
       { id: "q1", question: "Tranh không có người thường dùng cấu trúc nào?", options: ["Chủ động hiện tại đơn", "Bị động hoàn thành", "Tương lai đơn"], answer: 1 },
+      { id: "q2", question: "Tranh chỉ có ghế xếp chồng, không có người. Câu nào đúng?", options: ["A man is stacking chairs.", "Some chairs have been stacked.", "Chairs are being painted."], answer: 1, explanation: "Không có người trong tranh nên “is stacking” và “are being painted” (đang diễn ra) đều sai." },
     ],
   },
   {
@@ -111,6 +117,7 @@ const detailed: Lesson[] = [
     ],
     quiz: [
       { id: "q1", question: "Lời khuyên đầu tiên của diễn giả là gì?", options: ["Start small", "Run every day", "Wake up early"], answer: 0 },
+      { id: "q2", question: "Lời khuyên thứ hai là gì?", options: ["Thưởng cho bản thân mỗi ngày", "Gắn thói quen mới vào việc bạn đã làm hằng ngày", "Rủ bạn bè cùng tập"], answer: 1, explanation: "“Attach a new habit to something you already do every day.”" },
     ],
   },
   {
@@ -287,79 +294,13 @@ const detailed: Lesson[] = [
   },
 ];
 
-/** Bài học dạng tóm tắt cho phần còn lại của đề cương. */
-type Brief = [slug: string, courseSlug: string, title: string, type: Lesson["type"], minutes: number, summary: string, free?: boolean];
-
-const briefs: Brief[] = [
-  ["ielts-band-descriptors", "ielts-foundation-5-0", "Band descriptors: giám khảo chấm thế nào?", "reading", 10, "Bốn tiêu chí chấm Writing và Speaking."],
-  ["ielts-listening-form-completion", "ielts-foundation-5-0", "Listening: Form Completion", "audio", 16, "Dự đoán loại thông tin cần điền và bẫy chính tả."],
-  ["ielts-reading-skimming", "ielts-foundation-5-0", "Reading: Skimming & Scanning", "reading", 18, "Đọc lướt lấy ý chính và đọc quét tìm chi tiết."],
-  ["ielts-writing-task2-structure", "ielts-foundation-5-0", "Writing Task 2: Cấu trúc 4 đoạn", "video", 20, "Mở bài – 2 thân bài – kết bài cho dạng Opinion."],
-  ["ielts-speaking-part1", "ielts-foundation-5-0", "Speaking Part 1: Trả lời mở rộng", "video", 12, "Công thức trả lời Part 1 tự nhiên trong 2–3 câu."],
-  ["intensive-coherence", "ielts-intensive-6-5", "Coherence & Cohesion nâng cao", "video", 22, "Liên kết ý bằng referencing và từ nối tinh tế.", true],
-  ["intensive-lexical", "ielts-intensive-6-5", "Lexical Resource: Collocations học thuật", "reading", 18, "Collocations theo chủ đề Education, Environment."],
-  ["intensive-speaking-part3", "ielts-intensive-6-5", "Speaking Part 3: Phát triển lập luận", "video", 20, "Mô hình PEEL cho câu trả lời Part 3."],
-  ["toeic-part2-questions", "toeic-650-plus", "Part 2: Hỏi – Đáp", "audio", 14, "Nhận diện câu hỏi Wh-, Yes/No và câu trả lời gián tiếp."],
-  ["toeic-part5-grammar", "toeic-650-plus", "Part 5: Ngữ pháp trọng tâm", "exercise", 20, "Từ loại, thì động từ và giới từ thường gặp."],
-  ["comm-small-talk", "everyday-communication", "Small talk: thời tiết, cuối tuần, sở thích", "video", 13, "Duy trì cuộc trò chuyện bằng câu hỏi mở."],
-  ["comm-ordering-food", "everyday-communication", "Gọi món tại nhà hàng", "video", 11, "Đặt bàn, gọi món, yêu cầu thanh toán."],
-  ["found-ipa-vowels", "english-foundation-a1", "IPA: 20 nguyên âm", "video", 15, "Phân biệt nguyên âm ngắn, dài và nguyên âm đôi.", true],
-  ["found-to-be", "english-foundation-a1", "Động từ to be", "video", 10, "am / is / are trong câu khẳng định, phủ định, nghi vấn."],
-  ["found-present-simple", "english-foundation-a1", "Thì hiện tại đơn", "exercise", 12, "Diễn tả thói quen và sự thật hiển nhiên."],
-  ["b1-reading-cities", "general-english-b1", "Reading: Cities of the Future", "reading", 15, "Đọc hiểu bài báo về đô thị thông minh."],
-  ["biz-email-basics", "business-english-essentials", "Viết email chuyên nghiệp", "reading", 16, "Cấu trúc email, mở đầu và kết thúc lịch sự.", true],
-  ["biz-meetings", "business-english-essentials", "Điều phối cuộc họp", "video", 18, "Mở đầu, chuyển ý, tổng kết cuộc họp."],
-  ["pron-th-sounds", "pronunciation-masterclass", "Âm /θ/ và /ð/", "video", 10, "Vị trí lưỡi và bài luyện cặp từ tối thiểu.", true],
-  ["pron-word-stress", "pronunciation-masterclass", "Trọng âm từ", "video", 12, "Quy tắc trọng âm cho từ 2–3 âm tiết."],
-  ["adv-reading-tfng", "ielts-advanced-7-5", "True / False / Not Given không còn bẫy", "reading", 22, "Phân biệt False và Not Given qua 5 dấu hiệu ngôn ngữ.", true],
-  ["adv-listening-part4", "ielts-advanced-7-5", "Listening Part 4: Bài giảng học thuật", "audio", 20, "Theo dõi cấu trúc bài giảng và đoán từ cần điền."],
-  ["adv-writing-complex-sentences", "ielts-advanced-7-5", "Câu phức cho band 7.5+", "reading", 18, "Mệnh đề quan hệ rút gọn, đảo ngữ và câu chẻ trong Writing."],
-  ["adv-speaking-abstract-topics", "ielts-advanced-7-5", "Speaking: Chủ đề trừu tượng", "video", 16, "Phát triển ý cho chủ đề xã hội, công nghệ, giá trị sống."],
-  ["speaking-fillers", "ielts-speaking-intensive", "Kéo dài thời gian suy nghĩ tự nhiên", "video", 10, "Thay \"umm\" bằng các cụm câu đệm tự nhiên.", true],
-  ["speaking-part2-storytelling", "ielts-speaking-intensive", "Part 2: Kể chuyện có cấu trúc", "video", 14, "Dùng mô hình Bối cảnh – Diễn biến – Cảm xúc để nói đủ 2 phút."],
-  ["speaking-idioms", "ielts-speaking-intensive", "Idioms dùng đúng chỗ", "reading", 12, "20 thành ngữ tự nhiên cho các chủ đề quen thuộc."],
-  ["task1-bar-pie", "ielts-writing-task-1", "Bar chart & Pie chart: So sánh số liệu", "reading", 18, "Ngôn ngữ so sánh và tỉ lệ phần trăm."],
-  ["task1-process", "ielts-writing-task-1", "Process: Quy trình sản xuất", "video", 16, "Câu bị động và từ nối trình tự cho dạng quy trình."],
-  ["starter-test-format", "toeic-starter-450", "Cấu trúc đề TOEIC Listening & Reading", "video", 12, "200 câu, 2 giờ và cách tính điểm.", true],
-  ["starter-office-vocabulary", "toeic-starter-450", "Từ vựng văn phòng cơ bản", "exercise", 15, "50 từ về phòng ban, thiết bị và lịch họp."],
-  ["starter-word-forms", "toeic-starter-450", "Từ loại: danh, động, tính, trạng", "exercise", 18, "Nhận diện vị trí từ loại trong câu Part 5."],
-  ["master-part3-inference", "toeic-master-850", "Part 3: Câu hỏi suy luận", "audio", 18, "Bắt ý ngầm và ý định của người nói.", true],
-  ["master-part4-talks", "toeic-master-850", "Part 4: Thông báo & quảng cáo", "audio", 16, "Dự đoán nội dung từ câu hỏi trước khi nghe."],
-  ["master-part7-multiple-passages", "toeic-master-850", "Part 7: Đoạn đọc kép và ba", "reading", 24, "Liên kết thông tin giữa email, lịch trình và biểu mẫu."],
-  ["sw-read-aloud", "toeic-speaking-writing", "Read a Text Aloud", "audio", 10, "Ngắt nghỉ, trọng âm và ngữ điệu khi đọc to.", true],
-  ["sw-describe-picture", "toeic-speaking-writing", "Describe a Picture", "video", 12, "Khung mô tả tranh trong 45 giây."],
-  ["sw-respond-email", "toeic-speaking-writing", "Respond to a Written Request", "reading", 16, "Trả lời email đủ 3 yêu cầu trong 10 phút."],
-  ["travel-hotel", "travel-english", "Đặt và nhận phòng khách sạn", "video", 11, "Hỏi giá, tiện nghi và yêu cầu dịch vụ phòng."],
-  ["travel-directions", "travel-english", "Hỏi đường và đi tàu điện", "video", 10, "Mẫu câu hỏi đường, mua vé và đổi tuyến."],
-  ["travel-problems", "travel-english", "Xử lý sự cố khi du lịch", "audio", 12, "Báo mất hành lý, lỡ chuyến bay và đi khám bệnh."],
-  ["interview-cv", "job-interview-english", "Viết CV tiếng Anh", "reading", 18, "Động từ hành động và cách định lượng thành tích."],
-  ["interview-star", "job-interview-english", "Khung trả lời STAR", "video", 16, "Situation – Task – Action – Result cho câu hỏi hành vi."],
-  ["present-signposting", "presentation-skills", "Từ dẫn dắt và chuyển ý", "video", 12, "Moving on to…, Let's look at…, To sum up…"],
-  ["present-qa", "presentation-skills", "Xử lý phần hỏi đáp", "video", 14, "Làm rõ câu hỏi, câu trả lời mở và khi chưa biết đáp án."],
-  ["kids-my-family", "kids-english-starters", "Gia đình của bé", "video", 10, "Giới thiệu thành viên gia đình qua bài hát."],
-  ["kids-phonics-abc", "kids-english-starters", "Phonics: Âm của chữ A – F", "audio", 8, "Nghe, nhại và nhận biết âm đầu của từ."],
-  ["teens-past-simple", "teens-english-a2", "Thì quá khứ đơn", "exercise", 15, "Động từ có quy tắc, bất quy tắc và cách đọc đuôi -ed.", true],
-  ["teens-comparatives", "teens-english-a2", "So sánh hơn và so sánh nhất", "exercise", 14, "Tính từ ngắn, tính từ dài và trường hợp đặc biệt."],
-  ["teens-writing-paragraph", "teens-english-a2", "Viết đoạn văn 80 từ", "reading", 16, "Câu chủ đề, câu hỗ trợ và câu kết."],
-  ["c1-reading-editorials", "advanced-english-c1", "Đọc bài xã luận", "reading", 20, "Nhận diện quan điểm tác giả và giọng văn.", true],
-  ["c1-ted-summary", "advanced-english-c1", "Tóm tắt một bài TED Talk", "video", 22, "Ghi chú, chọn ý chính và viết tóm tắt 150 từ."],
-  ["c1-hedging-language", "advanced-english-c1", "Ngôn ngữ rào đón (Hedging)", "reading", 15, "It could be argued that…, There is some evidence to suggest…"],
-  ["vocab-prefixes", "academic-vocabulary-b2", "Tiền tố phủ định và mức độ", "exercise", 12, "un-, in-, dis-, mis-, over-, under- và cách dùng."],
-  ["vocab-collocations", "academic-vocabulary-b2", "Collocations học thuật", "reading", 16, "conduct research, draw a conclusion, play a role…"],
-  ["podcast-note-taking", "podcast-listening-b2", "Ghi chú khi nghe", "audio", 14, "Ký hiệu viết tắt và cách ghi ý chính nhanh.", true],
-  ["podcast-connected-speech", "podcast-listening-b2", "Nối âm và nuốt âm", "audio", 12, "Vì sao \"want to\" nghe thành \"wanna\"."],
-  ["podcast-shadowing", "podcast-listening-b2", "Shadowing hiệu quả", "audio", 10, "Quy trình 4 bước nhại theo người bản ngữ."],
-  ["c2-nuance-synonyms", "english-mastery-c2", "Sắc thái từ đồng nghĩa", "reading", 20, "Phân biệt claim, assert, allege, contend.", true],
-  ["c2-register", "english-mastery-c2", "Văn phong trang trọng và thân mật", "reading", 18, "Chuyển đổi một đoạn văn giữa các văn phong."],
-  ["c2-idioms-metaphors", "english-mastery-c2", "Thành ngữ và ẩn dụ", "video", 16, "Thành ngữ trong báo chí và diễn văn."],
-];
-
 export const lessons: Lesson[] = [
   ...detailed,
-  ...briefs.map(([slug, courseSlug, title, type, durationMinutes, summary, free]) => ({
-    slug, courseSlug, title, type, durationMinutes, summary, free,
-    content: [summary, "Nội dung chi tiết của bài học sẽ được cập nhật trong phiên bản tiếp theo."],
-  })),
+  ...ieltsLessons,
+  ...toeicLessons,
+  ...communicationLessons,
+  ...businessLessons,
+  ...generalLessons,
 ];
 
 export const getLesson = (slug: string) => lessons.find((l) => l.slug === slug);
