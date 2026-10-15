@@ -4,7 +4,7 @@ import HomePage from "@/pages/HomePage";
 import {
   CoursesPage, CourseDetailPage, LearningPage, LearningPathsPage, PracticePage, VocabularyPage, GrammarPage,
   LibraryPage, TeachersPage, TeacherDetailPage, DashboardPage, LoginPage, RegisterPage, SearchPage, InfoPage,
-  NotFoundPage, ListeningPage, SpeakingPage, ReadingPage, WritingPage,
+  NotFoundPage, PlacementTestPage, ListeningPage, SpeakingPage, ReadingPage, WritingPage,
 } from "./lazyPages";
 
 export const router = createBrowserRouter([
@@ -16,6 +16,7 @@ export const router = createBrowserRouter([
       { path: "/courses/:slug", element: <CourseDetailPage /> },
       { path: "/learning/:slug", element: <LearningPage /> },
       { path: "/learning-paths", element: <LearningPathsPage /> },
+      { path: "/placement-test", element: <PlacementTestPage /> },
       { path: "/listening", element: <ListeningPage /> },
       { path: "/speaking", element: <SpeakingPage /> },
       { path: "/reading", element: <ReadingPage /> },

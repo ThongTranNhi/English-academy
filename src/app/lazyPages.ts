@@ -16,6 +16,7 @@ export const LoginPage = lazy(() => import("@/pages/LoginPage"));
 export const RegisterPage = lazy(() => import("@/pages/RegisterPage"));
 export const SearchPage = lazy(() => import("@/pages/SearchPage"));
 export const InfoPage = lazy(() => import("@/pages/InfoPage"));
+export const PlacementTestPage = lazy(() => import("@/pages/PlacementTestPage"));
 export const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 export const ListeningPage = lazy(() => import("@/pages/SkillPages").then((m) => ({ default: m.ListeningPage })));
 export const SpeakingPage = lazy(() => import("@/pages/SkillPages").then((m) => ({ default: m.SpeakingPage })));

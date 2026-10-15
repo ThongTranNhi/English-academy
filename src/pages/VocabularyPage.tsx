@@ -7,12 +7,16 @@ import { Quiz } from "@/components/shared/Quiz";
 import { SpeakButton } from "@/components/shared/SpeakButton";
 import { Badge } from "@/components/ui/badge";
 import { Flashcards } from "@/features/vocabulary/Flashcards";
+import { VocabReview } from "@/features/vocabulary/VocabReview";
 import { buildVocabQuiz } from "@/features/vocabulary/buildVocabQuiz";
 import { getIcon } from "@/lib/icons";
 import { toneStyles } from "@/lib/tone";
 import { cn } from "@/lib/utils";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useProgressStore } from "@/store/progressStore";
+
+/** Toàn bộ từ của mọi chủ đề, dùng cho phiên ôn lặp lại ngắt quãng. */
+const allWords = Array.from(new Map(vocabTopics.flatMap((t) => t.words).map((w) => [w.word, w])).values());
 
 export default function VocabularyPage() {
   const [params, setParams] = useSearchParams();
@@ -50,6 +54,11 @@ export default function VocabularyPage() {
               );
             })}
           </ul>
+        </section>
+
+        <section id="review" aria-labelledby="review-heading" className="scroll-mt-28">
+          <h2 id="review-heading" className="mb-6 text-2xl font-bold">Ôn tập hôm nay</h2>
+          <VocabReview words={allWords} />
         </section>
 
         <section id="flashcard" aria-labelledby="flashcard-heading" className="scroll-mt-28">

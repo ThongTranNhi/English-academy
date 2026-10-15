@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { ChevronDown, LayoutDashboard, LogOut, Menu, Search, X } from "lucide-react";
 import { mainNav } from "@/data/navigation";
@@ -7,7 +7,9 @@ import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
-import { SearchDialog } from "./SearchDialog";
+
+// Hộp tìm kiếm kéo theo toàn bộ dữ liệu bài học, nên chỉ tải khi người dùng mở tìm kiếm.
+const SearchDialog = lazy(() => import("./SearchDialog").then((m) => ({ default: m.SearchDialog })));
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -212,7 +214,11 @@ export function Header() {
         </div>
       )}
 
-      <SearchDialog open={searchOpen} onClose={closeSearch} />
+      {searchOpen && (
+        <Suspense fallback={null}>
+          <SearchDialog open onClose={closeSearch} />
+        </Suspense>
+      )}
     </header>
   );
 }

@@ -15,10 +15,13 @@ export const mainNav: NavItem[] = [
   {
     label: "Lộ trình",
     href: "/learning-paths",
-    children: ["A1", "A2", "B1", "B2", "C1", "C2"].map((lv) => ({
-      label: `Cấp độ ${lv}`,
-      href: `/learning-paths#${lv.toLowerCase()}`,
-    })),
+    children: [
+      { label: "Test xếp lớp", href: "/placement-test" },
+      ...["A1", "A2", "B1", "B2", "C1", "C2"].map((lv) => ({
+        label: `Cấp độ ${lv}`,
+        href: `/learning-paths#${lv.toLowerCase()}`,
+      })),
+    ],
   },
   {
     label: "Luyện tập",
@@ -35,6 +38,7 @@ export const mainNav: NavItem[] = [
     href: "/vocabulary",
     children: [
       { label: "Chủ đề", href: "/vocabulary#topics", description: "Từ vựng theo chủ đề" },
+      { label: "Ôn tập hôm nay", href: "/vocabulary#review", description: "Lặp lại ngắt quãng" },
       { label: "Flashcard", href: "/vocabulary#flashcard", description: "Lật thẻ ghi nhớ" },
       { label: "Quiz", href: "/vocabulary#quiz", description: "Kiểm tra nhanh" },
     ],

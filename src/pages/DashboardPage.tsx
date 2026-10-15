@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuthStore } from "@/store/authStore";
 import { useProgressStore } from "@/store/progressStore";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { DailyProgress } from "@/features/progress/DailyProgress";
 
 export default function DashboardPage() {
   usePageMeta("Dashboard");
@@ -43,7 +44,9 @@ export default function DashboardPage() {
         <Button variant="outline" size="sm" onClick={reset}><RotateCcw aria-hidden /> Xóa tiến độ</Button>
       </div>
 
-      <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <DailyProgress />
+
+      <ul className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {stats.map((s) => (
           <li key={s.label} className="rounded-[14px] border border-slate-200 bg-white p-5">
             <s.icon className="mb-3 size-6 text-primary" aria-hidden />
