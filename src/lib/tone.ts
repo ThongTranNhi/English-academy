@@ -1,11 +1,14 @@
 import type { Tone } from "@/types";
 
-/** Bảng màu theo tone, dùng cho ảnh bìa, icon và nhãn. */
-export const toneStyles: Record<Tone, { cover: string; soft: string; text: string; ring: string }> = {
-  indigo: { cover: "from-indigo-500 to-violet-600", soft: "bg-indigo-50", text: "text-indigo-600", ring: "ring-indigo-200" },
-  cyan: { cover: "from-cyan-500 to-sky-600", soft: "bg-cyan-50", text: "text-cyan-700", ring: "ring-cyan-200" },
-  amber: { cover: "from-amber-400 to-orange-500", soft: "bg-amber-50", text: "text-amber-700", ring: "ring-amber-200" },
-  navy: { cover: "from-slate-800 to-slate-900", soft: "bg-slate-100", text: "text-slate-700", ring: "ring-slate-200" },
-  emerald: { cover: "from-emerald-500 to-teal-600", soft: "bg-emerald-50", text: "text-emerald-700", ring: "ring-emerald-200" },
-  rose: { cover: "from-rose-500 to-pink-600", soft: "bg-rose-50", text: "text-rose-700", ring: "ring-rose-200" },
+/**
+ * Bảng màu theo tone, dùng cho ảnh bìa, icon và nhãn.
+ * `solid` là khối màu đậm kèm màu chữ đạt tương phản; `shade` là bóng đáy 3D đi cùng.
+ */
+export const toneStyles: Record<Tone, { cover: string; soft: string; text: string; ring: string; solid: string; shade: string }> = {
+  indigo: { cover: "from-primary to-grape", soft: "bg-primary-soft", text: "text-primary", ring: "ring-primary/30", solid: "bg-primary text-white", shade: "shadow-[0_6px_0_var(--color-primary-shade)]" },
+  cyan: { cover: "from-sky to-primary", soft: "bg-sky-soft", text: "text-sky-ink", ring: "ring-sky/40", solid: "bg-sky text-navy", shade: "shadow-[0_6px_0_var(--color-sky-shade)]" },
+  amber: { cover: "from-sun to-tangerine", soft: "bg-sun-soft", text: "text-sun-ink", ring: "ring-sun/50", solid: "bg-sun text-navy", shade: "shadow-[0_6px_0_var(--color-sun-shade)]" },
+  navy: { cover: "from-grape to-fuchsia-500", soft: "bg-grape-soft", text: "text-grape-ink", ring: "ring-grape/30", solid: "bg-grape text-white", shade: "shadow-[0_6px_0_var(--color-grape-shade)]" },
+  emerald: { cover: "from-leaf to-teal-500", soft: "bg-leaf-soft", text: "text-leaf-ink", ring: "ring-leaf/40", solid: "bg-leaf text-navy", shade: "shadow-[0_6px_0_var(--color-leaf-shade)]" },
+  rose: { cover: "from-coral to-tangerine", soft: "bg-coral-soft", text: "text-coral-ink", ring: "ring-coral/30", solid: "bg-coral text-navy", shade: "shadow-[0_6px_0_var(--color-coral-shade)]" },
 };

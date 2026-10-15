@@ -1,6 +1,8 @@
 {
   "name": "english-academy",
   "private": true,
+  "author": "jathong (ThongTranNhi) <jathong0107@gmail.com>",
+  "license": "UNLICENSED",
   "version": "1.2.0",
   "type": "module",
   "scripts": {

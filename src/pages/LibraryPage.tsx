@@ -4,11 +4,10 @@ import type { LibraryType } from "@/types";
 import { libraryItems, libraryTypeLabels } from "@/data/library";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Container } from "@/components/shared/Container";
-import { CoverArt } from "@/components/shared/CoverArt";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { Tabs } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { libraryIcon } from "@/features/lessons/libraryIcon";
+import { LibraryCover } from "@/features/lessons/LibraryCover";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function LibraryPage() {
@@ -35,8 +34,8 @@ export default function LibraryPage() {
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {items.map((item) => (
               <li key={item.id}>
-                <article className="flex h-full flex-col overflow-hidden rounded-[14px] border border-slate-200/80 bg-white shadow-sm">
-                  <CoverArt tone={item.tone} icon={libraryIcon[item.type]} label={libraryTypeLabels[item.type]} className="aspect-[16/10]" />
+                <article className="duo-card lift-card group flex h-full flex-col overflow-hidden">
+                  <LibraryCover item={item} className="aspect-[16/10]" />
                   <div className="flex flex-1 flex-col p-5">
                     <div className="mb-2 flex flex-wrap gap-1.5">
                       <Badge variant="navy">{item.level}</Badge>

@@ -56,7 +56,8 @@ export function Header() {
   const closeSearch = useCallback(() => setSearchOpen(false), []);
 
   return (
-    <header className={cn("sticky top-0 z-50 border-b bg-white/95 backdrop-blur transition-shadow", scrolled ? "border-slate-200 shadow-sm" : "border-transparent")}>
+    <header className={cn("sticky top-0 z-50 border-b-2 bg-white/95 backdrop-blur transition-shadow", scrolled ? "border-slate-200 shadow-[0_6px_20px_rgb(30_27_75/0.08)]" : "border-transparent")}>
+      <div aria-hidden className="rainbow-bar h-1.5" />
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-white">
         Bỏ qua điều hướng
       </a>
@@ -95,7 +96,7 @@ export function Header() {
                         setOpenMenu((m) => (m === item.label && !keepOpen ? null : item.label));
                       }}
                       className={cn(
-                        "flex items-center gap-0.5 whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-medium transition-colors hover:text-primary 2xl:px-3 2xl:text-[15px]",
+                        "flex items-center gap-0.5 whitespace-nowrap rounded-xl px-2.5 py-2 text-sm font-bold transition-colors hover:bg-primary-soft hover:text-primary 2xl:px-3 2xl:text-[15px]",
                         location.pathname.startsWith(item.href) ? "text-primary" : "text-slate-700",
                       )}
                     >
@@ -104,7 +105,7 @@ export function Header() {
                     </button>
                     {openMenu === item.label && (
                       <div className="absolute left-0 top-full pt-2">
-                        <div className={cn("rounded-2xl border border-slate-200 bg-white p-3 shadow-xl", item.children.some((c) => c.description) ? "w-[520px]" : "w-60")}>
+                        <div className={cn("rounded-3xl border-2 border-slate-200 bg-white p-3 shadow-[0_6px_0_#e2e8f0,0_24px_40px_rgb(30_27_75/0.12)]", item.children.some((c) => c.description) ? "w-[520px]" : "w-60")}>
                           <ul className={cn("grid gap-1", item.children.some((c) => c.description) && "grid-cols-2")}>
                             {item.children.map((child) => (
                               <li key={child.href}>
@@ -125,7 +126,7 @@ export function Header() {
                 ) : (
                   <NavLink
                     to={item.href}
-                    className={({ isActive }) => cn("block whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-medium transition-colors hover:text-primary 2xl:px-3 2xl:text-[15px]", isActive ? "text-primary" : "text-slate-700")}
+                    className={({ isActive }) => cn("block whitespace-nowrap rounded-xl px-2.5 py-2 text-sm font-bold transition-colors hover:bg-primary-soft hover:text-primary 2xl:px-3 2xl:text-[15px]", isActive ? "text-primary" : "text-slate-700")}
                   >
                     {item.label}
                   </NavLink>
@@ -160,7 +161,7 @@ export function Header() {
 
       {/* Mobile / tablet menu */}
       {mobileOpen && (
-        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-16 overflow-y-auto border-t border-slate-200 bg-white lg:top-[76px] xl:hidden">
+        <div id="mobile-menu" className="fixed inset-x-0 bottom-0 top-[70px] overflow-y-auto border-t border-slate-200 bg-white lg:top-[82px] xl:hidden">
           <Container className="py-4">
             <nav aria-label="Điều hướng di động">
               <ul className="divide-y divide-slate-100">

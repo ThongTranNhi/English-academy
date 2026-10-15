@@ -5,6 +5,8 @@ export type Tone = "indigo" | "cyan" | "amber" | "navy" | "emerald" | "rose";
 
 export interface Teacher {
   slug: string;
+  /** Avatar minh họa trong public/images/teachers; thiếu thì hiện chữ cái viết tắt. */
+  photo?: string;
   name: string;
   title: string;
   specialties: string[];
@@ -24,6 +26,8 @@ export interface CourseModule {
 export interface Course {
   slug: string;
   title: string;
+  /** Ảnh bìa trong public/images/courses; thiếu thì dùng ảnh bìa gradient. */
+  image?: string;
   category: CourseCategory;
   level: CefrLevel;
   teacherSlug: string;
@@ -87,6 +91,8 @@ export type LibraryType = "video" | "audio" | "podcast" | "transcript" | "docume
 
 export interface LibraryItem {
   id: string;
+  /** Ảnh minh họa trong public/images/library; thiếu thì dùng ảnh bìa gradient. */
+  image?: string;
   title: string;
   type: LibraryType;
   level: CefrLevel;

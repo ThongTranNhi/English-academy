@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { RouteFrame } from "./RouteFrame";
 import { AcademyMascot } from "@/components/shared/AcademyMascot";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 /** Cuộn về đầu trang khi đổi route, hoặc tới phần tử có id khớp với hash. */
 function ScrollManager() {
@@ -29,6 +30,7 @@ function PageFallback() {
 }
 
 export function MainLayout() {
+  useScrollReveal();
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollManager />

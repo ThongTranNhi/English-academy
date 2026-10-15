@@ -18,8 +18,8 @@ export const infoPages: InfoPage[] = [
     slug: "contact",
     title: "Liên hệ",
     sections: [
-      { heading: "Tư vấn khóa học", body: "Email: hello@englishacademy.vn · Hotline: 1900 0000 (8:00 – 21:00 hằng ngày)." },
-      { heading: "Hợp tác giảng dạy", body: "Gửi CV và chứng chỉ về teachers@englishacademy.vn." },
+      { heading: "Tư vấn khóa học", body: "Email: jathong0107@gmail.com · Hotline: 0396 098 034." },
+      { heading: "Hợp tác giảng dạy", body: "Gửi CV và chứng chỉ về jathong0107@gmail.com." },
     ],
   },
   {

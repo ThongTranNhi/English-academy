@@ -5,7 +5,7 @@ import { TeacherCard } from "@/features/teachers/TeacherCard";
 
 export function TeachersSection() {
   return (
-    <section aria-labelledby="teachers-heading" className="section-y">
+    <section aria-labelledby="teachers-heading" className="section-y bg-coral-wash">
       <Container>
         <SectionHeading id="teachers-heading" eyebrow="Đội ngũ giảng viên" title="Học cùng những người thầy tận tâm" description="Giảng viên có chứng chỉ quốc tế, nhiều năm kinh nghiệm và chuyên môn rõ ràng." action={{ label: "Xem tất cả giảng viên", href: "/teachers" }} />
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

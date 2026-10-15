@@ -28,7 +28,7 @@ export default function TeacherDetailPage() {
       <Container className="grid gap-10 py-10 lg:grid-cols-[320px_1fr] lg:py-14">
         <aside className="space-y-6">
           <div className="flex flex-col items-center rounded-[16px] border border-slate-200 bg-white p-6 text-center">
-            <Avatar name={teacher.name} tone={teacher.tone} size="xl" />
+            <Avatar name={teacher.name} tone={teacher.tone} src={teacher.photo} size="xl" />
             <p className="mt-4 text-lg font-bold">{teacher.name}</p>
             <p className="text-sm text-primary">{teacher.title}</p>
             <dl className="mt-6 grid w-full grid-cols-3 gap-2 border-t border-slate-100 pt-5">

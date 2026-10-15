@@ -1,11 +1,44 @@
-import { Star } from "lucide-react";
-import type { LumiMood } from "@/lib/lumi";
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { LUMI_IDLE_SWAP_MS, LUMI_SLEEP_AFTER_MS, lumiClipSrc, lumiMoodClip, type LumiClip, type LumiIdleClip, type LumiMood } from "@/lib/lumi";
 
-export function LumiCharacter({ mood = "idle", sequence = 0, motion = true }: { mood?: LumiMood; sequence?: number; motion?: boolean }) {
+const allClips: LumiClip[] = ["wave", "talk", "happy", "sad", "think", "celebrate", "read", "sleepy", "cover"];
+let clipsPreloaded = false;
+
+function LumiFrame({ mood, clip, animate }: { mood: LumiMood; clip: LumiClip; animate: boolean }) {
   return (
-    <span key={`${mood}-${sequence}-${motion}`} data-mood={mood} className={`lumi-actor relative block h-full w-full ${motion ? "" : "lumi-motion-off"}`} aria-hidden>
-      <img src={mood === "celebrate" ? "/images/academy-lumi-celebrate.webp" : "/images/academy-lumi.webp"} alt="" width={512} height={512} draggable={false} className="lumi-pose h-full w-full object-contain" />
-      {mood === "celebrate" && <span className="lumi-sparkles absolute inset-0">{Array.from({ length: 6 }, (_, index) => <Star key={index} className={`lumi-star lumi-star-${index} absolute size-4 fill-amber-300 text-amber-400 sm:size-5`} />)}</span>}
+    <span data-mood={mood} data-clip={clip} className="lumi-actor relative block h-full w-full" aria-hidden>
+      <img src={lumiClipSrc(clip, !animate)} alt="" width={512} height={512} draggable={false} className="lumi-pose h-full w-full object-contain" />
     </span>
   );
+}
+
+/** Idle tự đổi giữa vẫy chào và đọc sách; lâu không ai tương tác thì ngủ gật. Remount để đánh thức. */
+function IdleLumi({ animate }: { animate: boolean }) {
+  const [clip, setClip] = useState<LumiIdleClip>("wave");
+  useEffect(() => {
+    if (!animate) return;
+    const swap = setInterval(() => setClip((current) => (current === "sleepy" ? current : current === "wave" ? "read" : "wave")), LUMI_IDLE_SWAP_MS);
+    const sleep = setTimeout(() => setClip("sleepy"), LUMI_SLEEP_AFTER_MS);
+    return () => { clearInterval(swap); clearTimeout(sleep); };
+  }, [animate]);
+  return <LumiFrame mood="idle" clip={clip} animate={animate} />;
+}
+
+export function LumiCharacter({ mood = "idle", sequence = 0, motion = true }: { mood?: LumiMood; sequence?: number; motion?: boolean }) {
+  const reducedMotion = useReducedMotion();
+  const animate = motion && !reducedMotion;
+
+  // Tải trước các bộ hình còn lại để đổi cảm xúc không bị nháy trắng.
+  useEffect(() => {
+    if (!animate || clipsPreloaded || typeof Image === "undefined") return;
+    const id = setTimeout(() => {
+      clipsPreloaded = true;
+      allClips.forEach((clip) => { new Image().src = lumiClipSrc(clip); });
+    }, 2500);
+    return () => clearTimeout(id);
+  }, [animate]);
+
+  if (mood === "idle") return <IdleLumi key={`idle-${sequence}-${animate}`} animate={animate} />;
+  return <LumiFrame key={`${mood}-${sequence}`} mood={mood} clip={lumiMoodClip[mood]} animate={animate} />;
 }
