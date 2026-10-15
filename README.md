@@ -45,9 +45,9 @@ Không gọi `npx tsc` trực tiếp, vì lệnh `tsc` trong `node_modules/.bin`
 Workflow `.github/workflows/frontend-ci.yml` chạy khi:
 
 - có Pull Request;
-- push lên các nhánh `feature/**`, `fix/**`, `refactor/**`, `docs/**`, `chore/**`, `test/**`.
+- push lên `main` và các nhánh `feature/**`, `fix/**`, `refactor/**`, `docs/**`, `chore/**`, `test/**`.
 
-Các bước: `npm ci` → `npm run typecheck` → `npm run lint` → `npm run test` → `vite build`, trên Node.js theo `.nvmrc` (24 LTS). Workflow chỉ có quyền `contents: read`, không dùng secrets và **không deploy** – việc deploy Cloudflare Pages vẫn được cấu hình riêng (xem bên dưới) và cần phê duyệt.
+Các bước: `npm ci` → `npm run typecheck` → `npm run lint` → `npm run test` → `vite build`, trên Node.js theo `.nvmrc` (24 LTS). Workflow chỉ có quyền `contents: read`, không dùng secrets và **không deploy**. Việc deploy do Cloudflare Pages Git integration đảm nhận (xem bên dưới), nên mỗi commit chỉ được deploy một lần.
 
 ## Cấu trúc
 
@@ -75,9 +75,19 @@ Màu và font được khai báo trong `src/styles/index.css` (`@theme`): `prima
 
 ## Deploy Cloudflare Pages
 
-1. Đẩy repo lên GitHub → Cloudflare Pages → *Connect to Git*.
-2. Build command: `npm run build` · Output directory: `dist`.
-3. SPA fallback cho React Router đã có sẵn trong `public/_redirects` (`/* /index.html 200`).
+Deploy bằng **Cloudflare Pages Git integration** (không dùng GitHub Actions để deploy, tránh deploy hai lần):
+
+| Thiết lập | Giá trị |
+|---|---|
+| Repository | `ThongTranNhi/English-academy` |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js | theo `.nvmrc` (Cloudflare build image v3 tự đọc file này) |
+
+- Mỗi lần merge vào `main`, Cloudflare tự build và deploy production. Nhánh khác chỉ tạo bản preview.
+- SPA fallback cho React Router có sẵn trong `public/_redirects` (`/* /index.html 200`) và được chép vào `dist/` khi build.
+- Không cần secrets nào trong repo: kết nối GitHub ↔ Cloudflare do Cloudflare GitHub App quản lý.
 
 ## Ghi chú trước khi phát hành
 
